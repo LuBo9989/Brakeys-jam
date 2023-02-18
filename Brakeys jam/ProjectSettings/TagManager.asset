@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Ground
   - Die Surface
+  - end
   layers:
   - Default
   - TransparentFX

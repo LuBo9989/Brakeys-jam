@@ -15,6 +15,7 @@ internal sealed class Player : MonoBehaviour
     private Rigidbody2D _rigidbody2D = null;
     private float _movementInput;
     private bool _isGrounded = true;
+    public int scenint;
 
     private void Awake()
     {
@@ -94,7 +95,8 @@ internal sealed class Player : MonoBehaviour
     {
         if (col.gameObject.tag == "end")
         {
-            
+            SceneManager.LoadScene(scenint);
+            scenint += 1;
         }
     }
 }
