@@ -1,9 +1,13 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using TMPro;
 
 internal sealed class Player : MonoBehaviour
 {
     [SerializeField]
     private float m_Speed, m_Jumpforce;
+    public float countdown;
+    public TextMeshProUGUI scord;
 
     [SerializeField]
     private Vector2 m_SpawnPoint;
@@ -21,6 +25,11 @@ internal sealed class Player : MonoBehaviour
     {
         if (Input.GetButtonDown("Jump") && _isGrounded)
             Jump();
+        scord.text = countdown.ToString();
+        if(countdown == 0)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
     }
 
     private void Jump()
@@ -62,7 +71,7 @@ internal sealed class Player : MonoBehaviour
     {
         if (collider == null)
             return;
-
+       
         if (collider.gameObject.CompareTag("Ground"))
         {
             _isGrounded = false;
@@ -78,5 +87,14 @@ internal sealed class Player : MonoBehaviour
         Destroy(diedPlayer.GetComponent<Player>());
         Destroy(diedPlayer.GetComponent<Rigidbody2D>());
         transform.position = m_SpawnPoint;
+        countdown -= 1;
+    }
+     
+    private void OnCollisionEnter2D(Collision2D col)
+    {
+        if (col.gameObject.tag == "end")
+        {
+            
+        }
     }
 }
